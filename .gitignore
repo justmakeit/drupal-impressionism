@@ -15,7 +15,7 @@ sites/all/README.txt
 sites/all/modules/README.txt
 sites/all/themes/README.txt
 .htaccess
-
+/nbproject
 #for non core developer
 #only include "sites" folder without exclusions before
 cron.php
@@ -30,3 +30,4 @@ xmlrpc.php
 /scripts
 /themes
 
+/nbproject/private/

@@ -1,0 +1,68 @@
+<?php
+
+/**
+* @file
+* Easy 3d online presentations.
+*
+* Development sponsored by just make IT! GbR - http://www.justmakeit.de/
+*/
+
+function impressionism_views_api() {
+  return array('api' => 2.0);
+}
+
+function impressionism_views_plugins() {
+  return array(
+    'style' => array( //declare the views_json style plugin
+      'views_impressionism' => array(
+        'title' => t('Impressionism'),
+        'theme' => 'views_impressionism',
+        'help' => t('Displays nodes in an 3d presentation'),
+        'handler' => 'views_plugin_style_impressionism',
+        'uses row plugin' => TRUE,
+        'uses fields' => TRUE,
+        'uses options' => TRUE,
+        'type' => 'normal',      
+      ),
+    ),
+    'row' => array( //declare the unformatted row plugin
+      'unformatted' => array(
+        'title' => t('Unformatted'),
+        'help' => t('(Displays the unformatted data for each row from the views query with each row on a new line. Set as | for views_json.'),
+        'handler' => 'views_plugin_row_unformatted',
+        'theme' => 'views_view_row_unformatted',
+        'uses fields' => TRUE,
+        'uses options' => TRUE,
+        'type' => 'normal',
+      )
+     ) 
+  );
+}
+
+class views_plugin_style_impressionism extends views_plugin_style {
+  /**
+   * Set default options
+   */
+  function option_definition() {
+    $options = parent::option_definition();
+    $options['format'] = array('default' => 'Exhibit');
+
+    return $options;
+  }
+ 
+  /**
+   * Provide a form for setting options.
+   *
+   * @param array $form
+   * @param array $form_state
+   */ 
+  function options_form(&$form, &$form_state) {
+    $form['format'] = array(
+      '#type' => 'radios',
+      '#title' => t('JSON data format'),
+      '#options' => array('Exhibit' => t('MIT Simile/Exhibit'), 'Canonical' => t('Canonical'), 'JSONP' => t('JSONP')),
+      '#default_value' => $this->options['format'],
+    );
+  }
+
+}

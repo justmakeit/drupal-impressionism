@@ -1,0 +1,5 @@
+name = Impressionism
+description = Online presentations with cool 3D effects.
+package = Impressionism
+core = 7.x
+php = 5.x
